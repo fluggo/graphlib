@@ -29,15 +29,15 @@ interface GraphOptions {
  */
 export type NodeKey = string | number | { [Symbol.toPrimitive](hint?: string): string | number };
 
-type NodeLabelFunction<K extends NodeKey, NodeLabel> = (v: K) => NodeLabel | undefined;
+export type NodeLabelFunction<K extends NodeKey, NodeLabel> = (v: K) => NodeLabel | undefined;
 
 type EdgeKey = unknown & { _fake?: number };
-interface Edge<K extends NodeKey> {
+export interface Edge<K extends NodeKey> {
   v: K;
   w: K;
   name?: string;
 }
-type EdgeLabelFunction<K extends NodeKey, EdgeLabel> = (v: K, w: K, name: string | undefined) => EdgeLabel | undefined;
+export type EdgeLabelFunction<K extends NodeKey, EdgeLabel> = (v: K, w: K, name: string | undefined) => EdgeLabel | undefined;
 
 function isEdge<K extends NodeKey>(obj: unknown): obj is Edge<K> {
   return typeof(obj) === 'object' && obj !== null &&
