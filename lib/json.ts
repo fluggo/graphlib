@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import Graph, { NodeKey } from './graph';
 
 interface JsonNode<K extends NodeKey, NodeLabel> {
@@ -36,13 +35,13 @@ export function write<K extends NodeKey,N,E,G>(g: Graph<K,N,E,G>): JsonGraph<K,N
     edges: writeEdges(g),
   };
   if(g.graph() !== undefined) {
-    json.value = _.clone(g.graph());
+    json.value = g.graph();
   }
   return json;
 }
 
 function writeNodes<K extends NodeKey,N,E,G>(g: Graph<K,N,E,G>): JsonNode<K,N>[] {
-  return _.map(g.nodes(), function(v) {
+  return g.nodes().map(v => {
     const nodeValue = g.node(v);
     const parent = g.parent(v);
     const node: JsonNode<K,N> = { v: v };
@@ -57,13 +56,13 @@ function writeNodes<K extends NodeKey,N,E,G>(g: Graph<K,N,E,G>): JsonNode<K,N>[]
 }
 
 function writeEdges<K extends NodeKey,N,E,G>(g: Graph<K,N,E,G>): JsonEdge<K,E>[] {
-  return _.map(g.edges(), function(e) {
+  return g.edges().map(e => {
     const edgeValue = g.edge(e);
     const edge: JsonEdge<K,E> = { v: e.v, w: e.w };
-    if(!_.isUndefined(e.name)) {
+    if(e.name !== undefined) {
       edge.name = e.name;
     }
-    if(!_.isUndefined(edgeValue)) {
+    if(edgeValue !== undefined) {
       edge.value = edgeValue;
     }
     return edge;

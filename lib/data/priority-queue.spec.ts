@@ -1,6 +1,5 @@
 import 'mocha';
 import { expect } from 'chai';
-import _ from 'lodash';
 import PriorityQueue from './priority-queue';
 
 describe('data.PriorityQueue', function() {

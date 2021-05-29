@@ -1,5 +1,4 @@
 import 'mocha';
-import _ from 'lodash';
 import { expect } from 'chai';
 import Graph from './graph';
 
@@ -65,14 +64,14 @@ describe('Graph', function() {
   describe('nodes', function() {
     it('is empty if there are no nodes in the graph', function() {
       const g = new Graph();
-      expect(g.nodes()).to.eql([]);
+      expect(g.nodes()).to.have.members([]);
     });
 
     it('returns the ids of nodes in the graph', function() {
       const g = new Graph();
       g.setNode('a');
       g.setNode('b');
-      expect(_.sortBy(g.nodes())).to.eql(['a', 'b']);
+      expect(g.nodes()).to.have.members(['a', 'b']);
     });
   });
 
@@ -81,7 +80,7 @@ describe('Graph', function() {
       const g = new Graph();
       g.setPath(['a', 'b', 'c']);
       g.setNode('d');
-      expect(_.sortBy(g.sources())).to.eql(['a', 'd']);
+      expect(g.sources()).to.have.members(['a', 'd']);
     });
   });
 
@@ -90,7 +89,7 @@ describe('Graph', function() {
       const g = new Graph();
       g.setPath(['a', 'b', 'c']);
       g.setNode('d');
-      expect(_.sortBy(g.sinks())).to.eql(['c', 'd']);
+      expect(g.sinks()).to.have.members(['c', 'd']);
     });
   });
 
@@ -102,9 +101,9 @@ describe('Graph', function() {
       g.setPath(['a', 'b', 'c']);
       g.setEdge('a', 'c', 456);
       const g2 = g.filterNodes(() => true);
-      expect(_.sortBy(g2.nodes())).eqls(['a', 'b', 'c']);
-      expect(_.sortBy(g2.successors('a'))).eqls(['b', 'c']);
-      expect(_.sortBy(g2.successors('b'))).eqls(['c']);
+      expect(g2.nodes()).to.have.members(['a', 'b', 'c']);
+      expect(g2.successors('a')).to.have.members(['b', 'c']);
+      expect(g2.successors('b')).to.have.members(['c']);
       expect(g2.node('a')).eqls(123);
       expect(g2.edge('a', 'c')).eqls(456);
       expect(g2.graph()).eqls('graph label');
@@ -116,23 +115,23 @@ describe('Graph', function() {
       const g2 = g.filterNodes(function() {
         return false;
       });
-      expect(g2.nodes()).eqls([]);
-      expect(g2.edges()).eqls([]);
+      expect(g2.nodes()).to.have.members([]);
+      expect(g2.edges()).to.have.members([]);
     });
 
     it('only includes nodes for which the filter returns true', function() {
       const g = new Graph();
       g.setNodes(['a', 'b']);
       const g2 = g.filterNodes(v => v === 'a');
-      expect(g2.nodes()).eqls(['a']);
+      expect(g2.nodes()).to.have.members(['a']);
     });
 
     it('removes edges that are connected to removed nodes', function() {
       const g = new Graph();
       g.setEdge('a', 'b');
       const g2 = g.filterNodes(v => v === 'a');
-      expect(_.sortBy(g2.nodes())).eqls(['a']);
-      expect(g2.edges()).eqls([]);
+      expect(g2.nodes()).to.have.members(['a']);
+      expect(g2.edges()).to.have.members([]);
     });
 
     it('preserves the directed option', function() {
@@ -403,7 +402,7 @@ describe('Graph', function() {
       g.setParent('a', 'parent');
       g.setParent('a', undefined);
       expect(g.parent('a')).to.be.undefined;
-      expect(_.sortBy(g.children())).to.eql(['a', 'parent']);
+      expect(g.children()).to.have.members(['a', 'parent']);
     });
 
     it('removes the parent if no parent was specified', function() {
@@ -411,7 +410,7 @@ describe('Graph', function() {
       g.setParent('a', 'parent');
       g.setParent('a');
       expect(g.parent('a')).to.be.undefined;
-      expect(_.sortBy(g.children())).to.eql(['a', 'parent']);
+      expect(g.children()).to.have.members(['a', 'parent']);
     });
 
     it('is idempotent to remove a parent', function() {
@@ -420,7 +419,7 @@ describe('Graph', function() {
       g.setParent('a');
       g.setParent('a');
       expect(g.parent('a')).to.be.undefined;
-      expect(_.sortBy(g.children())).to.eql(['a', 'parent']);
+      expect(g.children()).to.have.members(['a', 'parent']);
     });
 
     it('allows using numbers', function() {
@@ -490,21 +489,21 @@ describe('Graph', function() {
     it('returns an empty list for a non-compound graph with the node', function() {
       const g = new Graph();
       g.setNode('a');
-      expect(g.children('a')).eqls([]);
+      expect(g.children('a')).to.have.members([]);
     });
 
     it ('returns all nodes for the root of a non-compound graph', function() {
       const g = new Graph();
       g.setNode('a');
       g.setNode('b');
-      expect(_.sortBy(g.children())).eqls(['a', 'b']);
+      expect(g.children()).to.have.members(['a', 'b']);
     });
 
     it('returns children for the node', function() {
       const g = new Graph({ compound: true });
       g.setParent('a', 'parent');
       g.setParent('b', 'parent');
-      expect(_.sortBy(g.children('parent'))).to.eql(['a', 'b']);
+      expect(g.children('parent')).to.have.members(['a', 'b']);
     });
 
     it('returns all nodes without a parent when the parent is not set', function() {
@@ -514,8 +513,8 @@ describe('Graph', function() {
       g.setNode('c');
       g.setNode('parent');
       g.setParent('a', 'parent');
-      expect(_.sortBy(g.children())).to.eql(['b', 'c', 'parent']);
-      expect(_.sortBy(g.children(undefined))).to.eql(['b', 'c', 'parent']);
+      expect(g.children()).to.have.members(['b', 'c', 'parent']);
+      expect(g.children(undefined)).to.have.members(['b', 'c', 'parent']);
     });
   });
 
@@ -530,9 +529,9 @@ describe('Graph', function() {
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
       g.setEdge('a', 'a');
-      expect(_.sortBy(g.predecessors('a'))).to.eql(['a']);
-      expect(_.sortBy(g.predecessors('b'))).to.eql(['a']);
-      expect(_.sortBy(g.predecessors('c'))).to.eql(['b']);
+      expect(g.predecessors('a')).to.have.members(['a']);
+      expect(g.predecessors('b')).to.have.members(['a']);
+      expect(g.predecessors('c')).to.have.members(['b']);
     });
   });
 
@@ -547,9 +546,9 @@ describe('Graph', function() {
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
       g.setEdge('a', 'a');
-      expect(_.sortBy(g.successors('a'))).to.eql(['a', 'b']);
-      expect(_.sortBy(g.successors('b'))).to.eql(['c']);
-      expect(_.sortBy(g.successors('c'))).to.eql([]);
+      expect(g.successors('a')).to.have.members(['a', 'b']);
+      expect(g.successors('b')).to.have.members(['c']);
+      expect(g.successors('c')).to.have.members([]);
     });
   });
 
@@ -564,9 +563,9 @@ describe('Graph', function() {
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
       g.setEdge('a', 'a');
-      expect(_.sortBy(g.neighbors('a'))).to.eql(['a', 'b']);
-      expect(_.sortBy(g.neighbors('b'))).to.eql(['a', 'c']);
-      expect(_.sortBy(g.neighbors('c'))).to.eql(['b']);
+      expect(g.neighbors('a')).to.have.members(['a', 'b']);
+      expect(g.neighbors('b')).to.have.members(['a', 'c']);
+      expect(g.neighbors('c')).to.have.members(['b']);
     });
   });
 
@@ -614,7 +613,7 @@ describe('Graph', function() {
       const g = new Graph();
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
-      expect(_.sortBy(g.edges(), ['v', 'w'])).to.eql([
+      expect(g.edges()).to.have.deep.members([
         { v: 'a', w: 'b' },
         { v: 'b', w: 'c' },
       ]);
@@ -924,9 +923,9 @@ describe('Graph', function() {
       const g = new Graph();
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
-      expect(g.inEdges('a')).to.eql([]);
-      expect(g.inEdges('b')).to.eql([{ v: 'a', w: 'b' }]);
-      expect(g.inEdges('c')).to.eql([{ v: 'b', w: 'c' }]);
+      expect(g.inEdges('a')).to.have.deep.members([]);
+      expect(g.inEdges('b')).to.have.deep.members([{ v: 'a', w: 'b' }]);
+      expect(g.inEdges('c')).to.have.deep.members([{ v: 'b', w: 'c' }]);
     });
 
     it('works for multigraphs', function() {
@@ -934,8 +933,8 @@ describe('Graph', function() {
       g.setEdge('a', 'b');
       g.setEdge('a', 'b', undefined, 'bar');
       g.setEdge('a', 'b', undefined, 'foo');
-      expect(g.inEdges('a')).to.eql([]);
-      expect(_.sortBy(g.inEdges('b'), 'name')).to.eql([
+      expect(g.inEdges('a')).to.have.deep.members([]);
+      expect(g.inEdges('b')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'bar' },
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
@@ -950,8 +949,8 @@ describe('Graph', function() {
       g.setEdge('b', 'c');
       g.setEdge('z', 'a');
       g.setEdge('z', 'b');
-      expect(g.inEdges('a', 'b')).to.eql([]);
-      expect(_.sortBy(g.inEdges('b', 'a'), 'name')).to.eql([
+      expect(g.inEdges('a', 'b')).to.have.deep.members([]);
+      expect(g.inEdges('b', 'a')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
       ]);
@@ -968,9 +967,9 @@ describe('Graph', function() {
       const g = new Graph();
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
-      expect(g.outEdges('a')).to.eql([{ v: 'a', w: 'b' }]);
-      expect(g.outEdges('b')).to.eql([{ v: 'b', w: 'c' }]);
-      expect(g.outEdges('c')).to.eql([]);
+      expect(g.outEdges('a')).to.have.deep.members([{ v: 'a', w: 'b' }]);
+      expect(g.outEdges('b')).to.have.deep.members([{ v: 'b', w: 'c' }]);
+      expect(g.outEdges('c')).to.have.deep.members([]);
     });
 
     it('works for multigraphs', function() {
@@ -978,12 +977,12 @@ describe('Graph', function() {
       g.setEdge('a', 'b');
       g.setEdge('a', 'b', undefined, 'bar');
       g.setEdge('a', 'b', undefined, 'foo');
-      expect(_.sortBy(g.outEdges('a'), 'name')).to.eql([
+      expect(g.outEdges('a')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'bar' },
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
       ]);
-      expect(g.outEdges('b')).to.eql([]);
+      expect(g.outEdges('b')).to.have.deep.members([]);
     });
 
     it('can return only edges to a specified node', function() {
@@ -994,11 +993,11 @@ describe('Graph', function() {
       g.setEdge('b', 'c');
       g.setEdge('z', 'a');
       g.setEdge('z', 'b');
-      expect(_.sortBy(g.outEdges('a', 'b'), 'name')).to.eql([
+      expect(g.outEdges('a', 'b')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
       ]);
-      expect(g.outEdges('b', 'a')).to.eql([]);
+      expect(g.outEdges('b', 'a')).to.have.deep.members([]);
     });
   });
 
@@ -1012,10 +1011,9 @@ describe('Graph', function() {
       const g = new Graph();
       g.setEdge('a', 'b');
       g.setEdge('b', 'c');
-      expect(g.nodeEdges('a')).to.eql([{ v: 'a', w: 'b' }]);
-      expect(_.sortBy(g.nodeEdges('b'), ['v', 'w']))
-        .to.eql([{ v: 'a', w: 'b' }, { v: 'b', w: 'c' }]);
-      expect(g.nodeEdges('c')).to.eql([{ v: 'b', w: 'c' }]);
+      expect(g.nodeEdges('a')).to.have.deep.members([{ v: 'a', w: 'b' }]);
+      expect(g.nodeEdges('b')).to.have.deep.members([{ v: 'a', w: 'b' }, { v: 'b', w: 'c' }]);
+      expect(g.nodeEdges('c')).to.have.deep.members([{ v: 'b', w: 'c' }]);
     });
 
     it('works for multigraphs', function() {
@@ -1023,12 +1021,12 @@ describe('Graph', function() {
       g.setEdge('a', 'b');
       g.setEdge({ v: 'a', w: 'b', name: 'bar' });
       g.setEdge({ v: 'a', w: 'b', name: 'foo' });
-      expect(_.sortBy(g.nodeEdges('a'), 'name')).to.eql([
+      expect(g.nodeEdges('a')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'bar' },
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
       ]);
-      expect(_.sortBy(g.nodeEdges('b'), 'name')).to.eql([
+      expect(g.nodeEdges('b')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'bar' },
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
@@ -1043,11 +1041,11 @@ describe('Graph', function() {
       g.setEdge('b', 'c');
       g.setEdge('z', 'a');
       g.setEdge('z', 'b');
-      expect(_.sortBy(g.nodeEdges('a', 'b'), 'name')).to.eql([
+      expect(g.nodeEdges('a', 'b')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
       ]);
-      expect(_.sortBy(g.nodeEdges('b', 'a'), 'name')).to.eql([
+      expect(g.nodeEdges('b', 'a')).to.have.deep.members([
         { v: 'a', w: 'b', name: 'foo' },
         { v: 'a', w: 'b' },
       ]);
