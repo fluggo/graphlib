@@ -27,7 +27,7 @@ interface GraphOptions {
  * which means it either needs to be a string, a number, or a type implementing
  * Symbol.toPrimitive.
  */
-type NodeKey = string | number | { [Symbol.toPrimitive](hint?: string): string | number };
+export type NodeKey = string | number | { [Symbol.toPrimitive](hint?: string): string | number };
 
 type NodeLabelFunction<K extends NodeKey, NodeLabel> = (v: K) => NodeLabel | undefined;
 
