@@ -104,9 +104,9 @@ describe('Graph', function() {
       expect(g2.nodes()).to.have.members(['a', 'b', 'c']);
       expect(g2.successors('a')).to.have.members(['b', 'c']);
       expect(g2.successors('b')).to.have.members(['c']);
-      expect(g2.node('a')).eqls(123);
-      expect(g2.edge('a', 'c')).eqls(456);
-      expect(g2.graph()).eqls('graph label');
+      expect(g2.node('a')).to.equal(123);
+      expect(g2.edge('a', 'c')).to.equal(456);
+      expect(g2.graph()).to.equal('graph label');
     });
 
     it('returns an empty graph when the filter selects nothing', function() {
@@ -163,7 +163,7 @@ describe('Graph', function() {
       g.setParent('a', 'parent');
 
       const g2 = g.filterNodes(() => true);
-      expect(g2.parent('a')).eqls('parent');
+      expect(g2.parent('a')).to.equal('parent');
     });
 
     it('includes multi-level subgraphs', function() {
@@ -174,8 +174,8 @@ describe('Graph', function() {
       const g2 = g.filterNodes(function() {
         return true;
       });
-      expect(g2.parent('a')).eqls('parent');
-      expect(g2.parent('parent')).eqls('root');
+      expect(g2.parent('a')).to.equal('parent');
+      expect(g2.parent('parent')).to.equal('root');
     });
 
     it('promotes a node to a higher subgraph if its parent is not included', function() {
@@ -184,7 +184,7 @@ describe('Graph', function() {
       g.setParent('parent', 'root');
 
       const g2 = g.filterNodes(v => v !== 'parent');
-      expect(g2.parent('a')).eqls('root');
+      expect(g2.parent('a')).to.equal('root');
     });
   });
 
@@ -393,8 +393,8 @@ describe('Graph', function() {
       g.setParent('a', 'parent');
       g.setParent('a', 'parent2');
       expect(g.parent('a')).to.equal('parent2');
-      expect(g.children('parent')).to.eql([]);
-      expect(g.children('parent2')).to.eql(['a']);
+      expect(g.children('parent')).to.have.members([]);
+      expect(g.children('parent2')).to.have.members(['a']);
     });
 
     it('removes the parent if the parent is undefined', function() {
@@ -478,7 +478,7 @@ describe('Graph', function() {
     it('defaults to en empty list for new nodes', function() {
       const g = new Graph({ compound: true });
       g.setNode('a');
-      expect(g.children('a')).to.eql([]);
+      expect(g.children('a')).to.have.members([]);
     });
 
     it('returns undefined for a non-compound graph without the node', function() {
@@ -606,7 +606,7 @@ describe('Graph', function() {
   describe('edges', function() {
     it('is empty if there are no edges in the graph', function() {
       const g = new Graph();
-      expect(g.edges()).to.eql([]);
+      expect(g.edges()).to.have.members([]);
     });
 
     it('returns the keys for edges in the graph', function() {
@@ -713,7 +713,7 @@ describe('Graph', function() {
     it('accepts numeric IDs #1', function() {
       const g = new Graph<string | number>();
       g.setEdge(1, 2, 'foo');
-      expect(g.edges()).eqls([{ v: 1, w: 2 }]);
+      expect(g.edges()).to.deep.equal([{ v: 1, w: 2 }]);
       expect(g.edge('1', '2')).to.be.undefined;
       expect(g.edge(1, 2)).to.equal('foo');
     });
@@ -721,7 +721,7 @@ describe('Graph', function() {
     it('accepts numeric IDs #2', function() {
       const g = new Graph<string | number>({ multigraph: true });
       g.setEdge(1, 2, 'foo', undefined);
-      expect(g.edges()).eqls([{ v: 1, w: 2 }]);
+      expect(g.edges()).to.deep.equal([{ v: 1, w: 2 }]);
       expect(g.edge('1', '2')).to.be.undefined;
       expect(g.edge(1, 2)).to.equal('foo');
     });
@@ -731,7 +731,7 @@ describe('Graph', function() {
       g.setEdge(1, 2, 'foo', '3');
       expect(g.edge('1', '2', '3')).to.be.undefined;
       expect(g.edge(1, 2, '3')).to.equal('foo');
-      expect(g.edges()).eqls([{ v: 1, w: 2, name: '3' }]);
+      expect(g.edges()).to.deep.equal([{ v: 1, w: 2, name: '3' }]);
     });
 
     it('treats edges in opposite directions as distinct in a digraph', function() {
@@ -756,7 +756,7 @@ describe('Graph', function() {
       expect(g.hasEdge('10', '9')).to.be.false;
       expect(g.hasEdge(10, 9)).to.be.true;
       expect(g.edge('9', '10')).to.be.undefined;
-      expect(g.edge(9, 10)).eqls('foo');
+      expect(g.edge(9, 10)).to.equal('foo');
     });
 
     it('is chainable', function() {
@@ -832,23 +832,23 @@ describe('Graph', function() {
     it('returns the value of the edge if it is part of the graph', function() {
       const g = new Graph<string, string, { foo: string }>();
       g.setEdge('a', 'b', { foo: 'bar' });
-      expect(g.edge('a', 'b')).to.eql({ foo: 'bar' });
-      expect(g.edge({ v: 'a', w: 'b' })).to.eql({ foo: 'bar' });
+      expect(g.edge('a', 'b')).to.deep.equal({ foo: 'bar' });
+      expect(g.edge({ v: 'a', w: 'b' })).to.deep.equal({ foo: 'bar' });
       expect(g.edge('b', 'a')).to.be.undefined;
     });
 
     it('returns the value of a multi-edge if it is part of the graph', function() {
       const g = new Graph<string, string, { bar: string }>({ multigraph: true });
       g.setEdge('a', 'b', { bar: 'baz' }, 'foo');
-      expect(g.edge('a', 'b', 'foo')).to.eql({ bar: 'baz' });
+      expect(g.edge('a', 'b', 'foo')).to.deep.equal({ bar: 'baz' });
       expect(g.edge('a', 'b')).to.be.undefined;
     });
 
     it('returns an edge in either direction in an undirected graph', function() {
       const g = new Graph<string, string, { foo: string }>({ directed: false });
       g.setEdge('a', 'b', { foo: 'bar' });
-      expect(g.edge('a', 'b')).to.eql({ foo: 'bar' });
-      expect(g.edge('b', 'a')).to.eql({ foo: 'bar' });
+      expect(g.edge('a', 'b')).to.deep.equal({ foo: 'bar' });
+      expect(g.edge('b', 'a')).to.deep.equal({ foo: 'bar' });
     });
   });
 
@@ -880,10 +880,10 @@ describe('Graph', function() {
       const g = new Graph();
       g.setEdge('a', 'b');
       g.removeEdge('a', 'b');
-      expect(g.successors('a')).to.eql([]);
-      expect(g.neighbors('a')).to.eql([]);
-      expect(g.predecessors('b')).to.eql([]);
-      expect(g.neighbors('b')).to.eql([]);
+      expect(g.successors('a')).to.have.members([]);
+      expect(g.neighbors('a')).to.have.members([]);
+      expect(g.predecessors('b')).to.have.members([]);
+      expect(g.neighbors('b')).to.have.members([]);
     });
 
     it('correctly decrements neighbor counts', function() {
@@ -892,18 +892,18 @@ describe('Graph', function() {
       g.setEdge({ v: 'a', w: 'b', name: 'foo' });
       g.removeEdge('a', 'b');
       expect(g.hasEdge('a', 'b', 'foo'));
-      expect(g.successors('a')).to.eql(['b']);
-      expect(g.neighbors('a')).to.eql(['b']);
-      expect(g.predecessors('b')).to.eql(['a']);
-      expect(g.neighbors('b')).to.eql(['a']);
+      expect(g.successors('a')).to.have.members(['b']);
+      expect(g.neighbors('a')).to.have.members(['b']);
+      expect(g.predecessors('b')).to.have.members(['a']);
+      expect(g.neighbors('b')).to.have.members(['a']);
     });
 
     it('works with undirected graphs', function() {
       const g = new Graph({ directed: false });
       g.setEdge('h', 'g');
       g.removeEdge('g', 'h');
-      expect(g.neighbors('g')).to.eql([]);
-      expect(g.neighbors('h')).to.eql([]);
+      expect(g.neighbors('g')).to.have.members([]);
+      expect(g.neighbors('h')).to.have.members([]);
     });
 
     it('is chainable', function() {
