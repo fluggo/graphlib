@@ -11,8 +11,8 @@ interface PQEntry<K> {
  * have its priority decreased in O(log n) time.
  */
 export default class PriorityQueue<K> {
-  _arr: PQEntry<K>[];
-  _keyIndices: Map<K, number>;
+  private _arr: PQEntry<K>[];
+  private _keyIndices: Map<K, number>;
 
   constructor() {
     this._arr = [];
@@ -64,7 +64,7 @@ export default class PriorityQueue<K> {
 
   /**
    * Inserts a new key into the priority queue. If the key already exists in
-   * the queue this function returns `false`; otherwise it will return `true`.
+   * the queue this function does nothing and returns `false`; otherwise it will return `true`.
    * Takes `O(n)` time.
    *
    * @param key the key to add

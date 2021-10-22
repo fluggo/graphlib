@@ -283,7 +283,7 @@ describe('Graph', function() {
     });
 
     it("can take a function that takes the node's name", function() {
-      const g = new Graph();
+      const g = new Graph<string, string>();
       g.setDefaultNodeLabel(v => v + '-foo');
       g.setNode('a');
       expect(g.node('a')).to.equal('a-foo');
@@ -797,7 +797,7 @@ describe('Graph', function() {
     });
 
     it("can take a function that takes the edge's endpoints and name", function() {
-      const g = new Graph({ multigraph: true });
+      const g = new Graph<string, string, string>({ multigraph: true });
       g.setDefaultEdgeLabel(function(v, w, name) {
         return `${v}-${w}-${name ?? 'undefined'}-foo`;
       });

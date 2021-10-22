@@ -29,6 +29,22 @@ interface GraphOptions {
  */
 export type NodeKey = string | number | { [Symbol.toPrimitive](hint?: string): string | number };
 
+/** Gets the NodeKey type of the given Graph type. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type NodeKeyOf<G extends Graph<any>> = G extends Graph<infer K, unknown, unknown, unknown> ? K : never;
+
+/** Gets the NodeLabel type of the given Graph type */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type NodeLabelOf<G extends Graph<any>> = G extends Graph<any, infer L, unknown, unknown> ? L : never;
+
+/** Gets the EdgeLabel type of the given Graph type */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type EdgeLabelOf<G extends Graph<any>> = G extends Graph<any, unknown, infer E, unknown> ? E : never;
+
+/** Gets the EdgeLabel type of the given Graph type */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type GraphLabelOf<G extends Graph<any>> = G extends Graph<any, unknown, unknown, infer GL> ? GL : never;
+
 export type NodeLabelFunction<K extends NodeKey, NodeLabel> = (v: K) => NodeLabel | undefined;
 
 type EdgeKey = unknown & { _fake?: number };
@@ -44,7 +60,7 @@ function isEdge<K extends NodeKey>(obj: unknown): obj is Edge<K> {
     'v' in obj && 'w' in obj;
 }
 
-export default class Graph<K extends NodeKey = string, NodeLabel = string, EdgeLabel = string, GraphLabel = string> {
+export default class Graph<K extends NodeKey = string, NodeLabel = unknown, EdgeLabel = unknown, GraphLabel = unknown> {
   private readonly _isDirected: boolean;
   private readonly _isMultigraph: boolean;
   private readonly _isCompound: boolean;
