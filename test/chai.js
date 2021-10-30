@@ -1,4 +1,5 @@
-var chai = require("chai");
+/* eslint-env commonjs */
+const chai = require('chai');
 
 module.exports = chai;
 

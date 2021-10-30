@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-env node */
 
-var package = require('../../package.json');
+const package = require('../../package.json');
 console.log('module.exports = \'' + package.version + '\';');

@@ -1,8 +1,9 @@
-var expect = require('./chai').expect;
+/* eslint-env mocha, commonjs */
+const expect = require('./chai').expect;
 
 describe('version', function() {
   it('should match the version from package.json', function() {
-    var packageVersion = require('../package').version;
+    const packageVersion = require('../package').version;
     expect(require('../lib/version')).to.equal(packageVersion);
   });
 });

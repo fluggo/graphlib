@@ -64,6 +64,7 @@ module.exports = {
         'while': { after: false },
       },
     }],
+    'quotes': ['warn', 'single', {avoidEscape: true, allowTemplateLiterals: true}],
 
     // Rules that seem too strict for now
     ...{
@@ -166,6 +167,7 @@ module.exports = {
         '@typescript-eslint/type-annotation-spacing': 'warn',
         '@typescript-eslint/prefer-function-type': 'warn',
         '@typescript-eslint/dot-notation': 'warn',
+        'quotes': ['off'],
         '@typescript-eslint/quotes': ['warn', 'single', {avoidEscape: true, allowTemplateLiterals: true}],
         // '@typescript-eslint/no-use-before-define': 'warn',
         '@typescript-eslint/member-delimiter-style': ['warn'],

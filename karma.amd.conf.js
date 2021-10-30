@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Oct 18 2014 17:38:05 GMT-0700 (PDT)
+/* eslint-env commonjs */
 
 module.exports = function(config) {
   config.set({
@@ -18,7 +18,7 @@ module.exports = function(config) {
       {pattern: 'node_modules/chai/chai.js', included: false},
       {pattern: 'build/graphlib*.js', included: false},
       {pattern: 'test/bundle.amd-test.js', included: false},
-      'test/test-main.js'
+      'test/test-main.js',
     ],
 
 
@@ -60,11 +60,11 @@ module.exports = function(config) {
     browsers: ['Chrome', 'Firefox', 'PhantomJS'],
 
     plugins: [
-      "karma-*"
+      "karma-*",
     ],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
   });
 };

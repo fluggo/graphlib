@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Oct 18 2014 17:38:05 GMT-0700 (PDT)
+/* eslint-env commonjs */
 
 module.exports = function(config) {
   config.set({
@@ -18,7 +18,7 @@ module.exports = function(config) {
       'build/graphlib.core.js',
 
       'node_modules/chai/chai.js',
-      'test/bundle-test.js'
+      'test/bundle-test.js',
     ],
 
 
@@ -63,6 +63,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
   });
 };
