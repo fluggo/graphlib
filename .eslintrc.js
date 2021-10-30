@@ -43,7 +43,7 @@ module.exports = {
 
     // Style rules
     'brace-style': ['warn', 'stroustrup'],
-    'linebreak-style': [ "error", "unix" ],
+    'linebreak-style': [ 'error', 'unix' ],
     'no-trailing-spaces': 'warn',
     'eol-last': 'warn',
     'comma-dangle': ['warn', {
