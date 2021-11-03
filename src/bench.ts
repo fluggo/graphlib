@@ -11,8 +11,8 @@ if(seed) {
 }
 
 import { Graph } from '../lib/graph';
-import components from '../lib/alg/components';
-import dijkstraAll from '../lib/alg/dijkstra-all';
+import { components } from '../lib/alg/components';
+import { dijkstraAll } from '../lib/alg/dijkstra-all';
 
 const NODE_SIZES = [100],
   EDGE_DENSITY = 0.2,
