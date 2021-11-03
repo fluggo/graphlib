@@ -1,4 +1,4 @@
-import Graph, { NodeKey } from './graph';
+import { Graph, NodeKey } from './graph';
 
 interface JsonNode<K extends NodeKey, NodeLabel> {
   v: K;

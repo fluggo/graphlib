@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Graph from './graph';
+import { Graph } from './graph';
 
 describe('Graph', function() {
   describe('initial state', function() {

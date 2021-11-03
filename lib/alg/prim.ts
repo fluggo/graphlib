@@ -1,7 +1,7 @@
-import Graph, { Edge, NodeKey } from '../graph';
-import PriorityQueue from '../data/priority-queue';
+import { Graph, Edge, NodeKey } from '../graph';
+import { PriorityQueue } from '../data/priority-queue';
 
-export default function prim<K extends NodeKey>(g: Graph<K>, weightFunc: (edge: Edge<K>) => number): Graph<K> {
+export function prim<K extends NodeKey>(g: Graph<K>, weightFunc: (edge: Edge<K>) => number): Graph<K> {
   const result = new Graph<K>();
   const parents = new Map<K, K>();
   const pq = new PriorityQueue<K>();

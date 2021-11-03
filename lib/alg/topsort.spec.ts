@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import topsort from './topsort';
+import { Graph } from '../graph';
+import { topsort } from './topsort';
 
 describe('alg.topsort', function() {
   it('returns an empty array for an empty graph', function() {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import dijkstra from './dijkstra';
+import { Graph } from '../graph';
+import { dijkstra } from './dijkstra';
 
 describe('alg.dijkstra', function() {
   it('assigns distance 0 for the source node', function() {

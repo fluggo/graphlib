@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph, { NodeKey, Edge } from '../graph';
-import prim from './prim';
+import { Graph, NodeKey, Edge } from '../graph';
+import { prim } from './prim';
 
 describe('alg.prim', function() {
   it('returns an empty graph for an empty input', function() {

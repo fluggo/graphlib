@@ -1,7 +1,7 @@
 import type { NodeKey } from '../graph';
-import type Graph from '../graph';
+import type { Graph } from '../graph';
 
-export default function topsort<K extends NodeKey>(g: Graph<K>): K[] {
+export function topsort<K extends NodeKey>(g: Graph<K>): K[] {
   const visited = new Set<K>();
   const stack = new Set<K>();
   const results: K[] = [];

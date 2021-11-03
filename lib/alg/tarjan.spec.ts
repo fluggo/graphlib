@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph, { NodeKey } from '../graph';
-import tarjan from './tarjan';
+import { Graph, NodeKey } from '../graph';
+import { tarjan } from './tarjan';
 
 describe('alg.tarjan', function() {
   it('returns an empty array for an empty graph', function() {

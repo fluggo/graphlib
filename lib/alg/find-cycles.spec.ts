@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import findCycles from './find-cycles';
+import { Graph } from '../graph';
+import { findCycles } from './find-cycles';
 
 describe('alg.findCycles', function() {
   it('returns an empty array for an empty graph', function() {

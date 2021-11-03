@@ -1,8 +1,8 @@
 import type { NodeKey } from '../graph';
-import Graph from '../graph';
-import topsort from './topsort';
+import { Graph } from '../graph';
+import { topsort } from './topsort';
 
-export default function isAcyclic<K extends NodeKey>(g: Graph<K>): boolean {
+export function isAcyclic<K extends NodeKey>(g: Graph<K>): boolean {
   try {
     topsort(g);
   }

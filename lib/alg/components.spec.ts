@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import components from './components';
+import { Graph } from '../graph';
+import { components } from './components';
 
 describe('alg.components', function() {
   it('returns an empty list for an empty graph', function() {

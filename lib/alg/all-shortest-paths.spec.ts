@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Graph from '../graph';
+import { Graph } from '../graph';
 import { DistanceMap, WeightFunc, EdgeFunc } from './types';
 
 export function tests(sp: (g: Graph<string>, w?: WeightFunc<string>, e?: EdgeFunc<string>) => Map<string, DistanceMap<string>>): void {

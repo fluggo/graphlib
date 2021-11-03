@@ -1,5 +1,5 @@
 import type { NodeKey } from '../graph';
-import type Graph from '../graph';
+import type { Graph } from '../graph';
 import type { DistanceMap, WeightFunc, EdgeFunc } from './types';
 
 function defaultWeightFunc() {
@@ -17,7 +17,7 @@ function defaultWeightFunc() {
  * @returns A two-level map of nodes to other nodes and their distances. You can obtain the shortest path between any two nodes
  *   by querying the source node followed by the target node and following the **predecessor** properties back to the source node.
  */
-export default function floydWarshall<K extends NodeKey>(g: Graph<K>, weightFn?: WeightFunc<K>, edgeFn?: EdgeFunc<K>): Map<K, DistanceMap<K>> {
+export function floydWarshall<K extends NodeKey>(g: Graph<K>, weightFn?: WeightFunc<K>, edgeFn?: EdgeFunc<K>): Map<K, DistanceMap<K>> {
   return runFloydWarshall(g,
     weightFn ?? defaultWeightFunc,
     edgeFn ?? (v => g.outEdges(v)!));

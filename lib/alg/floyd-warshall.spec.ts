@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import floydWarshall from './floyd-warshall';
+import { Graph } from '../graph';
+import { floydWarshall } from './floyd-warshall';
 import * as allShortestPathsTest from './all-shortest-paths.spec';
 
 describe('alg.floydWarshall', function() {

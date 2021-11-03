@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import postorder from './postorder';
+import { Graph } from '../graph';
+import { postorder } from './postorder';
 
 describe('alg.postorder', function() {
   it('returns the root for a singleton graph', function() {

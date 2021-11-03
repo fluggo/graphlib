@@ -1,7 +1,7 @@
 import type { NodeKey } from '../graph';
 import type { DistanceMap, NodeDistance, WeightFunc, EdgeFunc } from './types';
-import PriorityQueue from '../data/priority-queue';
-import type Graph from '../graph';
+import { PriorityQueue } from '../data/priority-queue';
+import type { Graph } from '../graph';
 
 function defaultWeightFunc() {
   return 1;
@@ -17,7 +17,7 @@ function defaultWeightFunc() {
  * @returns A map of nodes to their distances. You can obtain the shortest path between the **source** node and node in the map
  *   by finding the target node and following the **predecessor** properties back to the **source** node.
  */
-export default function dijkstra<K extends NodeKey>(g: Graph<K>, source: K, weightFn?: WeightFunc<K>, edgeFn?: EdgeFunc<K>): DistanceMap<K> {
+export function dijkstra<K extends NodeKey>(g: Graph<K>, source: K, weightFn?: WeightFunc<K>, edgeFn?: EdgeFunc<K>): DistanceMap<K> {
   return runDijkstra(g, source,
     weightFn ?? defaultWeightFunc,
     edgeFn ?? (v => g.outEdges(v)!));

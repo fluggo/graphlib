@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Graph, { NodeKey } from './graph';
+import { Graph, NodeKey } from './graph';
 import { read, write } from './json';
 
 describe('json', function() {

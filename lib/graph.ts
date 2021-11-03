@@ -60,7 +60,7 @@ function isEdge<K extends NodeKey>(obj: unknown): obj is Edge<K> {
     'v' in obj && 'w' in obj;
 }
 
-export default class Graph<K extends NodeKey = string, NodeLabel = unknown, EdgeLabel = unknown, GraphLabel = unknown> {
+export class Graph<K extends NodeKey = string, NodeLabel = unknown, EdgeLabel = unknown, GraphLabel = unknown> {
   private readonly _isDirected: boolean;
   private readonly _isMultigraph: boolean;
   private readonly _isCompound: boolean;

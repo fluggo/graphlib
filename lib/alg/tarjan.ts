@@ -1,5 +1,5 @@
 import type { NodeKey } from '../graph';
-import type Graph from '../graph';
+import type { Graph } from '../graph';
 
 interface VisitedEntry {
   onStack: boolean;
@@ -7,7 +7,7 @@ interface VisitedEntry {
   index: number;
 }
 
-export default function tarjan<K extends NodeKey>(g: Graph<K>): K[][] {
+export function tarjan<K extends NodeKey>(g: Graph<K>): K[][] {
   let index = 0;
   const stack: K[] = [];
   const visited = new Map<K, VisitedEntry>();

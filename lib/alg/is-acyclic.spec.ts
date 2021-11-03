@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Graph from '../graph';
-import isAcyclic from './is-acyclic';
+import { Graph } from '../graph';
+import { isAcyclic } from './is-acyclic';
 
 describe('alg.isAcyclic', function() {
   it('returns true if the graph has no cycles', function() {

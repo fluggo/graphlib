@@ -1,5 +1,5 @@
 import type { NodeKey } from '../graph';
-import type Graph from '../graph';
+import type { Graph } from '../graph';
 
 /*
  * A helper that preforms a pre- or post-order traversal on the input graph
@@ -9,7 +9,7 @@ import type Graph from '../graph';
  *
  * Order must be one of "pre" or "post".
  */
-export default function dfs<K extends NodeKey>(g: Graph<K>, vs: K | K[], order: 'pre' | 'post'): K[] {
+export function dfs<K extends NodeKey>(g: Graph<K>, vs: K | K[], order: 'pre' | 'post'): K[] {
   const vsarr = Array.isArray(vs) ? vs : [vs];
   const navigation = g.isDirected() ? g.successors.bind(g) : g.neighbors.bind(g);
 

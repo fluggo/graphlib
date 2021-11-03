@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import PriorityQueue from './priority-queue';
+import { PriorityQueue } from './priority-queue';
 
 describe('data.PriorityQueue', function() {
   describe('size', function() {
