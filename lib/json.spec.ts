@@ -1,4 +1,3 @@
-import 'mocha';
 import { expect } from 'chai';
 import Graph, { NodeKey } from './graph';
 import { read, write } from './json';

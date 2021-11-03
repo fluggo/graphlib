@@ -1,4 +1,3 @@
-import 'mocha';
 import { expect } from 'chai';
 import Graph from '../graph';
 import postorder from './postorder';

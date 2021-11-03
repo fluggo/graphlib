@@ -1,4 +1,3 @@
-import 'mocha';
 import { expect } from 'chai';
 import Graph, { NodeKey, Edge } from '../graph';
 import prim from './prim';

@@ -2,5 +2,6 @@
   "extends": "ts-node/node10/tsconfig.json",
   "compilerOptions": {
     "strict": true,                                 /* Enable all strict type-checking options. */
+    "downlevelIteration": true,
   }
 }
