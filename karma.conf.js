@@ -22,7 +22,9 @@ module.exports = function(config) {
     karmaTypescriptConfig: {
       bundlerOptions: {
         addNodeGlobals: false,
+        entrypoints: /\.spec\.ts$/,
       },
+      exclude: ['node_modules', 'src', 'test'],
       tsconfig: './tsconfig.json',
     },
 
