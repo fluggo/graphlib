@@ -10,9 +10,9 @@ interface PQEntry<K> {
  * the queue. Adding and removing elements takes O(log n) time. A key can
  * have its priority decreased in O(log n) time.
  */
-  private _arr: PQEntry<K>[];
-  private _keyIndices: Map<K, number>;
 export class PriorityQueue<K> {
+  private readonly _arr: PQEntry<K>[];
+  private readonly _keyIndices: Map<K, number>;
 
   constructor() {
     this._arr = [];
