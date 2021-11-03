@@ -16,7 +16,10 @@
   ],
   "scripts": {
     "test": "mocha",
-    "lint": "eslint \"**/*.js\" \"**/*.ts\""
+    "lint": "eslint \"**/*.js\" \"**/*.ts\"",
+    "karma": "karma start",
+    "karma-single": "karma start --single-run",
+    "bench": "ts-node src/bench.ts"
   },
   "dependencies": {
     "@wry/tuple": "^0.3.0"
