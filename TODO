@@ -1,0 +1,7 @@
+- Make GraphLabel, EdgeLabel, and NodeLabel mandatory; if the user wants undefined to be possible, let them specify that in the type
+- Consolidate the maps describing a node (_nodes, _in, _out, _parent, _children, _preds, _sucs)
+- Remove _nodeCount and _edgeCount
+
+eslint:
+* Enforce spacing around for/if https://eslint.org/docs/rules/padding-line-between-statements
+* Use https://github.com/typescript-eslint/typescript-eslint/blob/v5.1.0/packages/eslint-plugin/docs/rules/consistent-type-imports.md

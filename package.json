@@ -1,14 +1,26 @@
 {
-  "name": "graphlib",
-  "version": "2.1.9-pre",
+  "name": "@fluggo/graphlib",
+  "version": "1.0.0",
   "description": "A directed and undirected multi-graph library",
   "author": "Chris Pettitt <cpettitt@gmail.com>",
+  "contributors": [
+    {
+      "name": "Brian Crowell",
+      "email": "brian@fluggo.com"
+    }
+  ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./alg": "./dist/alg/index.js"
+  },
   "files": [
-    "index.js",
     "dist/",
-    "lib/"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "keywords": [
     "graph",
@@ -19,7 +31,8 @@
     "lint": "eslint \"**/*.js\" \"**/*.ts\"",
     "karma": "karma start",
     "karma-single": "karma start --single-run",
-    "bench": "ts-node src/bench.ts"
+    "bench": "ts-node src/bench.ts",
+    "prepack": "tsc --project tsconfig.mjs.json"
   },
   "dependencies": {
     "@wry/tuple": "^0.3.0"
@@ -32,7 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "benny": "^3.7.1",
-    "chai": "4.2.0",
+    "chai": "^4.3.4",
     "eslint": "^7.32.0",
     "eslint-plugin-deprecation": "^1.2.1",
     "eslint-plugin-import": "^2.25.2",

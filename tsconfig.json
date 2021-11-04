@@ -3,6 +3,8 @@
   "compilerOptions": {
     "strict": true,                                 /* Enable all strict type-checking options. */
     "downlevelIteration": true,
+    "module": "esnext",
+    "moduleResolution": "node"
   },
   "exclude": [
     "node_modules",
