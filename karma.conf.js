@@ -24,7 +24,7 @@ module.exports = function(config) {
         addNodeGlobals: false,
         entrypoints: /\.spec\.ts$/,
       },
-      exclude: ['node_modules', 'src', 'test'],
+      exclude: ['node_modules', 'src', 'test', 'dist'],
       tsconfig: './tsconfig.json',
     },
 

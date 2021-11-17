@@ -9,10 +9,29 @@
   "license": "MIT",
   "main": "index.js",
   "files": [
-    "index.js",
     "dist/",
-    "lib/"
+    "esm/"
   ],
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./esm/index.js"
+    },
+    "./json": {
+      "require": "./dist/json.js",
+      "import": "./esm/json.js"
+    },
+    "./alg": {
+      "require": "./dist/alg/index.js",
+      "import": "./esm/alg.js"
+    },
+    "./data": {
+      "require": "./dist/data/index.js",
+      "import": "./esm/data.js"
+    }
+  },
   "keywords": [
     "graph",
     "algorithms"
@@ -22,7 +41,8 @@
     "lint": "eslint \"**/*.js\" \"**/*.ts\"",
     "karma": "karma start",
     "karma-single": "karma start --single-run",
-    "bench": "ts-node src/bench.ts"
+    "bench": "ts-node src/bench.ts",
+    "build": "tsc --project tsconfig.build.json"
   },
   "dependencies": {
     "@wry/tuple": "^0.3.0"
