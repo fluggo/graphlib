@@ -1,5 +1,4 @@
-import type { NodeKey } from '../graph';
-import type { Graph } from '../graph';
+import type { Graph, NodeKey } from '../graph';
 
 export function components<K extends NodeKey>(g: Graph<K>): K[][] {
   const visited = new Set<K>();

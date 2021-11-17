@@ -1,5 +1,4 @@
-import type { NodeKey } from '../graph';
-import { Graph } from '../graph';
+import type { Graph, NodeKey } from '../graph';
 import { topsort } from './topsort';
 
 export function isAcyclic<K extends NodeKey>(g: Graph<K>): boolean {

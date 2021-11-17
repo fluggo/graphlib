@@ -1,5 +1,4 @@
-import type { NodeKey } from '../graph';
-import type { Graph } from '../graph';
+import type { Graph, NodeKey } from '../graph';
 import type { DistanceMap, WeightFunc, EdgeFunc } from './types';
 
 function defaultWeightFunc() {

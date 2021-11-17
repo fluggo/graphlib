@@ -1,5 +1,4 @@
-import type { NodeKey } from '../graph';
-import type { Graph } from '../graph';
+import type { Graph, NodeKey } from '../graph';
 
 /*
  * A helper that preforms a pre- or post-order traversal on the input graph

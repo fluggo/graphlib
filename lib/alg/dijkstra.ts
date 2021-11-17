@@ -1,7 +1,6 @@
-import type { NodeKey } from '../graph';
+import type { Graph, NodeKey } from '../graph';
 import type { DistanceMap, NodeDistance, WeightFunc, EdgeFunc } from './types';
 import { PriorityQueue } from '../data/priority-queue';
-import type { Graph } from '../graph';
 
 function defaultWeightFunc() {
   return 1;
