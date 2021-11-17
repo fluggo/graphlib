@@ -3,6 +3,9 @@
   "version": "2.1.9-pre",
   "description": "A directed and undirected multi-graph library",
   "author": "Chris Pettitt <cpettitt@gmail.com>",
+  "contributors": [
+    "Brian Crowell <brian@fluggo.com>"
+  ],
   "license": "MIT",
   "main": "index.js",
   "files": [
