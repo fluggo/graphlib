@@ -37,12 +37,13 @@
     "algorithms"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "tsc --noEmit && mocha",
     "lint": "eslint \"**/*.js\" \"**/*.ts\"",
     "karma": "karma start",
     "karma-single": "karma start --single-run",
     "bench": "ts-node src/bench.ts",
-    "build": "tsc --project tsconfig.build.json"
+    "build": "tsc --project tsconfig.build.json",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "@wry/tuple": "^0.3.0"
