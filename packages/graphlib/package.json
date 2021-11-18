@@ -49,9 +49,6 @@
   "dependencies": {
     "@wry/tuple": "^0.3.0"
   },
-  "devDependencies": {
-    "@types/node": "^14.14.35"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fluggo/graphlib.git"
