@@ -1,0 +1,57 @@
+{
+  "name": "@fluggo/graphlib",
+  "version": "0.1.0",
+  "description": "A directed and undirected multi-graph library",
+  "author": "Chris Pettitt <cpettitt@gmail.com>",
+  "contributors": [
+    "Brian Crowell <brian@fluggo.com>"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "dist/",
+    "esm/"
+  ],
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./esm/index.js"
+    },
+    "./json": {
+      "require": "./dist/json.js",
+      "import": "./esm/json.js"
+    },
+    "./alg": {
+      "require": "./dist/alg/index.js",
+      "import": "./esm/alg.js"
+    },
+    "./data": {
+      "require": "./dist/data/index.js",
+      "import": "./esm/data.js"
+    }
+  },
+  "keywords": [
+    "graph",
+    "algorithms"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint \"**/*.js\" \"**/*.ts\"",
+    "karma": "karma start",
+    "karma-single": "karma start --single-run",
+    "bench": "ts-node src/bench.ts",
+    "build": "tsc --project tsconfig.build.json"
+  },
+  "dependencies": {
+    "@wry/tuple": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.35"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fluggo/graphlib.git"
+  }
+}
