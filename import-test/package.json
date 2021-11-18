@@ -1,19 +1,5 @@
 {
-  "name": "import-test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "tsc --noEmit && node test.mjs && ts-node test.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fluggo/graphlib.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fluggo/graphlib/issues"
-  },
-  "homepage": "https://github.com/fluggo/graphlib#readme"
+  }
 }
