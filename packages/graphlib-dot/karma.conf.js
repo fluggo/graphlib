@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sat Oct 18 2014 17:38:05 GMT-0700 (PDT)
+/* eslint-env commonjs */
 
 module.exports = function(config) {
   config.set({
@@ -10,16 +10,23 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'karma-typescript'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'build/graphlib-dot.js',
-
-      'node_modules/chai/chai.js',
-      'test/bundle-test.js'
+      'lib/**/*.ts',
     ],
+
+
+    karmaTypescriptConfig: {
+      bundlerOptions: {
+        addNodeGlobals: false,
+        entrypoints: /\.spec\.ts$/,
+      },
+      exclude: ['node_modules', 'src', 'test', 'dist'],
+      tsconfig: './tsconfig.json',
+    },
 
 
     // list of files to exclude
@@ -30,13 +37,14 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/*.ts': 'karma-typescript',
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'karma-typescript'],
 
 
     // web server port
@@ -58,11 +66,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox', 'PhantomJS'],
+    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: false,
   });
 };
