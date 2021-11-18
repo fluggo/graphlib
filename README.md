@@ -2,7 +2,14 @@
 
 Graphlib is a JavaScript library that provides data structures for undirected and directed multi-graphs along with algorithms that can be used with them.
 
-<h2 style="color: red;">About this version</h2>
+This is a monorepo, which means several packages can be published from here.
+For the Graphlib package, go to:
+
+| Package | Badges |
+| -- | -- |
+| [Graphlib](packages/graphlib) | ![NPM version](https://img.shields.io/npm/v/@fluggo/graphlib) ![License](https://img.shields.io/github/license/fluggo/graphlib)  ![Dependencies](https://img.shields.io/librariesio/release/npm/@fluggo/graphlib) |
+
+## About this version
 
 This is a TypeScript port of Graphlib and probably soon several of its companion libraries.
 Graphlib was originally written and maintained by Chris Pettitt.
