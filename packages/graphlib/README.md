@@ -17,6 +17,6 @@ You can find the original Graphlib [here](https://github.com/dagrejs/graphlib).
 
 # License
 
-Graphlib is licensed under the terms of the MIT License. See the [LICENSE](LICENSE) file for details.
+Graphlib is licensed under the terms of the MIT License. See the [LICENSE](../../LICENSE) file for details.
 
 [npm package manager]: http://npmjs.org/
