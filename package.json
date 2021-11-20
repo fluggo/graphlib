@@ -1,6 +1,7 @@
 {
   "workspaces": [
     "packages/graphlib",
+    "packages/graphlib-dot",
     "import-test"
   ],
   "devDependencies": {

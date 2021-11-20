@@ -1,6 +1,0 @@
-{
-  "allowedStartRules": ["start", "graphStmt"],
-  "tspegjs": {
-    "customHeader": "// @ts-nocheck"
-  }
-}

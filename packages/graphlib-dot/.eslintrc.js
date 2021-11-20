@@ -1,6 +1,6 @@
 /* eslint-env node */
 module.exports = {
-  ignorePatterns: ['/dist', '/lib/dot-grammar.ts'],
+  ignorePatterns: ['/dist', '/lib/dot-grammar.js'],
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {

@@ -5,7 +5,6 @@
 //  * HTML IDs
 
 {
-  var _ = require("./lodash");
   var directed;
 }
 
@@ -14,21 +13,17 @@ start
 
 graphStmt
   = _* strict:(strict _)? type:graphType _* id:(id)? _* '{' _* stmts:stmtList? _* '}' _* {
-      return {type: type, id: id, strict: strict !== null, stmts: stmts};
+      return {type: type, id: id, strict: strict !== null, stmts: stmts || []};
     }
 
 stmtList
-  = first:stmt _* ';'? rest:(_* inner:stmt _* ';'?)* {
-      var result = [first];
-      for (var i = 0; i < rest.length; ++i) {
-        result.push(rest[i][1]);
-      }
-      return result;
+  = first:stmt _* ';'? rest:(_* @stmt _* ';'?)* {
+      return [first, ...rest];
     }
 
 stmt
   = attrStmt
-  / edgeStmt
+  / edgeStmt
   / subgraphStmt
   / inlineAttrStmt
   / nodeStmt
@@ -40,9 +35,7 @@ attrStmt
 
 inlineAttrStmt
   = k:id _* '=' _* v:id {
-      var attrs = {};
-      attrs[k] = v;
-      return { type: "inlineAttr", attrs: attrs };
+      return { type: "inlineAttr", attrs: {[k]: v} };
     } 
 
 nodeStmt
@@ -50,56 +43,35 @@ nodeStmt
 
 edgeStmt
   = lhs:(nodeIdOrSubgraph) _* rhs:edgeRHS _* attrs:attrList? {
-      var elems = [lhs];
-      for (var i = 0; i < rhs.length; ++i) {
-        elems.push(rhs[i]);
-      }
-      return { type: "edge", elems: elems, attrs: attrs || {} };
+      return { type: "edge", elems: [lhs, ...rhs], attrs: attrs || {} };
     }
 
 subgraphStmt
-  = id:(subgraph _* (id _*)?)? '{' _* stmts:stmtList? _* '}' {
-      id = (id && id[2]) || [];
-      return { type: "subgraph", id: id[0], stmts: stmts };
+  = id:(subgraph _* @(@id _*)?)? '{' _* stmts:stmtList? _* '}' {
+      return { type: "subgraph", id: id, stmts: stmts || [] };
     }
 
 attrList
-  = first:attrListBlock rest:(_* attrListBlock)* {
-      var result = first;
-      for (var i = 0; i < rest.length; ++i) {
-        _.merge(result, rest[i][1]);
-      }
-      return result;
+  = first:attrListBlock rest:(_* @attrListBlock)* {
+      return Object.assign({}, first, ...rest);
     }
 
 attrListBlock
   = '[' _* aList:aList? _* ']' { return aList; }
 
 aList
-  = first:idDef rest:(_* ','? _* idDef)* {
-      var result = first;
-      for (var i = 0; i < rest.length; ++i) {
-        _.merge(result, rest[i][3]);
-      }
-      return result;
+  = first:idDef rest:(_* ','? _* @idDef)* {
+      return Object.assign({}, first, ...rest);
     }
 
 edgeRHS
   = ("--" !{ return directed; } / "->" &{ return directed; }) _* rhs:(nodeIdOrSubgraph) _* rest:edgeRHS? {
-      var result = [rhs];
-      if (rest) {
-        for (var i = 0; i < rest.length; ++i) {
-          result.push(rest[i]);
-        }
-      }
-      return result;
+      return [rhs, ...(rest ?? [])];
     }
 
 idDef
-  = k:id v:(_* '=' _* id)? {
-      var result = {};
-      result[k] = v[3];
-      return result;
+  = k:id v:(_* '=' _* @id)? {
+      return {[k]: v};
     }
 
 nodeIdOrSubgraph

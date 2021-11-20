@@ -10,15 +10,18 @@
     "parse"
   ],
   "scripts": {
-    "generate-parser": "peggy --plugin ts-pegjs --extra-options-file src/pegconfig.json -o lib/dot-grammar.ts src/dot-grammar.pegjs"
+    "test": "tsc --noEmit && mocha",
+    "lint": "eslint \"**/*.js\" \"**/*.ts\"",
+    "generate-parser": "peggy --allowed-start-rules start,graphStmt -o lib/dot-grammar.js src/dot-grammar.pegjs"
   },
   "dependencies": {
-    "graphlib": "2.1.8",
-    "lodash": "4.17.19"
+    "nanoid": "^3.1.30"
   },
   "devDependencies": {
-    "peggy": "^1.2.0",
-    "ts-pegjs": "^1.2.1"
+    "peggy": "^1.2.0"
+  },
+  "peerDependencies": {
+    "@fluggo/graphlib": "^0.1.1"
   },
   "repository": {
     "type": "git",
