@@ -52,5 +52,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/fluggo/graphlib.git"
+  },
+  "engines": {
+    "node": ">=12.22.0"
   }
 }

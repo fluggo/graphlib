@@ -1,6 +1,5 @@
 /* eslint-env node */
 module.exports = {
-  ignorePatterns: ['/dist', '/lib/dot-grammar.js'],
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,6 +19,7 @@ module.exports = {
     // * https://eslint.org/docs/rules/
     // * https://www.npmjs.com/package/@typescript-eslint/eslint-plugin
     'eslint:recommended',
+    'plugin:node/recommended',
   ],
   rules: {
     // Correctness rules
@@ -117,6 +117,14 @@ module.exports = {
         '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/semi': ['error', 'always'],
         'semi': 'off',
+
+        // Things TypeScript does for us
+        'node/no-unsupported-features/es-syntax': ['error', {
+          ignores: [
+            'modules',
+          ],
+        }],
+        'node/no-missing-import': 'off',
 
         // Style rules
         '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
@@ -224,6 +232,11 @@ module.exports = {
                 message: "Don't forget to remove this before committing.",
               },
             ],
+
+            // Spec imports from the top package.json are okay
+            'node/no-extraneous-import': ['error', {
+              allowModules: ['chai'],
+            }],
           },
         },
       ],
